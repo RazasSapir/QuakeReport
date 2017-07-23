@@ -4,11 +4,13 @@ public class Earthquake {
     private double mMag;
     private String mLocation;
     private long mTimeInMilliseconds;
+    private String mWebLink;
 
-    public Earthquake(double mag, String location, long timeInMilliseconds) {
+    public Earthquake(double mag, String location, long timeInMilliseconds, String webLink) {
         mMag = mag;
         mTimeInMilliseconds = timeInMilliseconds;
         mLocation = location;
+        mWebLink = webLink;
     }
 
     public double getMag() {
@@ -21,5 +23,9 @@ public class Earthquake {
 
     public String getLocation() {
         return mLocation;
+    }
+
+    public String getWebLink() {
+        return mWebLink;
     }
 }

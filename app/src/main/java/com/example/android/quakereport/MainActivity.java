@@ -36,6 +36,29 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     public static final String LOG_TAG = MainActivity.class.getName();
     private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query";
 
+    private static String getDefaultEndDate() {
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        int year = c.get(java.util.Calendar.YEAR);
+        int month = c.get(java.util.Calendar.MONTH);
+        int day = c.get(java.util.Calendar.DAY_OF_MONTH);
+        String date = year + "-" + month + "-" + day;
+        return date;
+    }
+
+    private static String getDefaultStartDate() {
+        String date;
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        int year = c.get(java.util.Calendar.YEAR);
+        int month = c.get(java.util.Calendar.MONTH);
+        int day = c.get(java.util.Calendar.DAY_OF_MONTH);
+        if (month == 1) {
+            month = 12;
+            year--;
+        }
+        date = year + "-" + month + "-" + day;
+        return date;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,7 +169,6 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         earthquakeListView.setVisibility(View.VISIBLE);
     }
 
-
     @Override
     public Loader<List<Earthquake>> onCreateLoader(int i, Bundle bundle) {
         Log.v(LOG_TAG, "onCreateLoader called...");
@@ -156,14 +178,22 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
                 getString(R.string.settings_min_magnitude_key),
                 getString(R.string.settings_min_magnitude_default));
 
-        String earthquakeLimitation = sharedPrefs.getString(
-                getString(R.string.setting_earthquake_limit_key),
-                getString(R.string.setting_earthquake_limit_default));
-
         String orderBy = sharedPrefs.getString(
                 getString(R.string.settings_order_by_key),
                 getString(R.string.settings_order_by_default)
         );
+
+        String earthquakeLimitation = sharedPrefs.getString(
+                getString(R.string.setting_earthquake_limit_key),
+                getString(R.string.setting_earthquake_limit_default));
+
+        String startTime = sharedPrefs.getString(
+                getString(R.string.setting_start_time_key),
+                getString(R.string.setting_start_time_default));
+
+        String endTime = sharedPrefs.getString(
+                getString(R.string.setting_end_time_key),
+                getDefaultEndDate());
 
         Uri baseUri = Uri.parse(USGS_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
@@ -172,6 +202,8 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         uriBuilder.appendQueryParameter("limit", earthquakeLimitation);
         uriBuilder.appendQueryParameter("minmag", minMagnitude);
         uriBuilder.appendQueryParameter("orderby", orderBy);
+        uriBuilder.appendQueryParameter("starttime", startTime);
+        uriBuilder.appendQueryParameter("endtime", endTime);
 
         return new EarthquakeLoader(this, uriBuilder.toString());
     }

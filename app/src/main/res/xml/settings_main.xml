@@ -23,4 +23,14 @@
         android:selectAllOnFocus="true"
         android:title="@string/setting_earthquake_limit_label" />
 
+    <com.example.android.quakereport.DatePreference
+        android:defaultValue="@string/setting_start_time_default"
+        android:key="@string/setting_start_time_key"
+        android:title="@string/setting_start_time_label" />
+
+    <com.example.android.quakereport.DatePreference
+        android:defaultValue="@string/setting_end_time_default"
+        android:key="@string/setting_end_time_key"
+        android:title="@string/setting_end_time_label" />
+
 </PreferenceScreen>

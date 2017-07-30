@@ -1,6 +1,8 @@
 package com.example.android.quakereport;
 
+import android.app.DialogFragment;
 import android.content.SharedPreferences;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -31,6 +33,12 @@ public class SettingsActivity extends AppCompatActivity {
 
             Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
             bindPreferenceSummaryToValue(orderBy);
+
+            Preference startTime = findPreference(getString(R.string.setting_start_time_key));
+            bindPreferenceSummaryToValue(startTime);
+
+            Preference endTime = findPreference(getString(R.string.setting_end_time_key));
+            bindPreferenceSummaryToValue(endTime);
         }
 
         @Override

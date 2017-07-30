@@ -10,10 +10,17 @@
     <string name="settings_min_magnitude_key" translatable="false">min_magnitude</string>
     <string name="settings_min_magnitude_default" translatable="false">6</string>
 
-
     <string name="setting_earthquake_limit_label">Number of earthquake limitation</string>
     <string name="setting_earthquake_limit_key" translatable="false">limit_earthquakes</string>
-    <string name="setting_earthquake_limit_default" translatable="false">10</string>
+    <string name="setting_earthquake_limit_default" translatable="false">100</string>
+
+    <string name="setting_start_time_label">Set start time</string>
+    <string name="setting_start_time_key">start_time</string>
+    <string name="setting_start_time_default">2017-1-1</string>
+
+    <string name="setting_end_time_label">Set end time</string>
+    <string name="setting_end_time_key">end_time</string>
+    <string name="setting_end_time_default">2017-1-1</string>
 
     <!-- Strings For Order-By Preference [CHAR LIMIT=30] -->
     <string name="settings_order_by_label">Order By</string>
